@@ -1,0 +1,36 @@
+create table user_detail(user_id int NOT NULL  , user_name varchar(30),
+mobile_no int(10) NOT NULL ,Email_id varchar(50),city varchar(20), location varchar(50));
+insert into user_detail values
+(1,"aditya sahoo",7787936260,"sahooaditya2003@gmail.com","bbsr","345.6474,645.74584"),
+(2,"amrit behera",3456876593,"beheraamrit956@gmail.com","ctc","453.75847,76.8549"),
+(3,"arzit panda",9937257149,"pandaarzit354@gmail.com","ctc","34.657,65.634"),
+(4,"arman panda",7787935250,"pandaarman@gmail.com","jsp","12.345,54.6765");
+select * from user_detail;
+create table Ambulance (id int NOT NULL  , driver_name varchar(30),
+mobile_no int(10) NOT NULL ,amb_no varchar(50),city varchar(20), location varchar(50));
+insert into Ambulance values
+(1,"Bikash sahoo",7787936260,"OD02B5647","jsp","2345.6474,645.74584"),
+(2,"Akash kar",3456876593,"OD21H6578","bbsr","453.75847,76.8549"),
+(3,"kuna sahoo",9937257149,"OD05FG5647","ctc","34.657,65.634"),
+(4,"Tapan mallik",7787935250,"OD02BB6791","bbsr","12.345,54.6765");
+select * from Ambulance;                      
+
+select user_detail.user_id as uid  ,Ambulance.id as Aid ,
+user_detail.city as u_city ,Ambulance.city as a_city
+from user_detail inner join Ambulance
+
+where uid<>Aid
+and u_city== a_city;
+create table booked_detail(id int primary key,user_id int not null,amb_id int not null ,booked_time DATETIME);
+insert into booked_detail values
+(1,1,2,"2008-11-11 13:23:44"),
+(2,2,1,"2008-11-09 15:45:21"),
+(3,3,5,"2008-11-11 11:12:01"),
+(4,4,3,"2008-10-29 14:56:59");
+select * from booked_detail;
+select booked_detail.id,user_detail.user_id,Ambulance.id 
+from ((booked_detail
+inner join user_detail on booked_detail.user_id=user_detail.user_id)
+inner join Ambulance on booked_detail.amb_id=Ambulance.id);
+
+
